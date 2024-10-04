@@ -1,7 +1,7 @@
 import { integer, serial, text, pgTable } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres'
-import client from '../config/database';
+import { client } from '../config/database';
 
 export const users = pgTable('tblusers', {
   id: serial('id').primaryKey(),

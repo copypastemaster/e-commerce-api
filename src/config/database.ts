@@ -1,10 +1,8 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
-
-
 dotenv.config();
 
-const client = new Client({
+export const client = new Client({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT!, 10),
   user: process.env.DB_USER,
@@ -12,7 +10,7 @@ const client = new Client({
   password: process.env.DB_PASSWORD,
 });
 
-const getConnection = async () => {
+export const getConnection = async () => {
   try {
     console.log('App connected to database');
     await client.connect();
@@ -23,6 +21,16 @@ const getConnection = async () => {
   }
 }
 
+export const disconnect = async () => {
+  try {
+    await client.end();
+    console.log('Disconnected from database.');
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(`Error closing database connection: ${err.message}`)
+    }
+  }
+}
+
 getConnection();
 
-export default client;

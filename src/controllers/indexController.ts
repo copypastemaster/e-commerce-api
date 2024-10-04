@@ -7,7 +7,7 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
     res.status(200).json(result);
   } catch (err) {
     if (err instanceof Error) {
-      throw new Error(err.message);
+      res.status(500).json({ message: 'Internal server error.' })
     }
   }
 }
