@@ -1,14 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import client from "../config/database";
+import { getUsers } from "../models/userSchema";
 
 const getData = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    
-    const result = await client.query(`
-      SELECT * FROM tblUsers
-    `)
-
-    res.status(201).json(result.rows[0]);
+    const result = await getUsers();
+    res.status(200).json(result);
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message);

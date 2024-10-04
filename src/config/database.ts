@@ -1,6 +1,7 @@
 import { Client } from 'pg';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 const client = new Client({
@@ -13,8 +14,8 @@ const client = new Client({
 
 const getConnection = async () => {
   try {
-    await client.connect();
     console.log('App connected to database');
+    await client.connect();
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message);
